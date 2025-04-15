@@ -34,7 +34,7 @@ fun SplashScreen(navController : NavHostController){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White), // Background color
+            .background(Color.White), 
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -42,12 +42,12 @@ fun SplashScreen(navController : NavHostController){
         ) {
             // Display Image
             Image(
-                painter = painterResource(id = R.drawable.jio), // Replace with your image
+                painter = painterResource(id = R.drawable.jio), 
                 contentDescription = "App Logo",
-                modifier = Modifier.size(150.dp) // Adjust size as needed
+                modifier = Modifier.size(150.dp) 
             )
 
-            Spacer(modifier = Modifier.height(16.dp)) // Space between image and text
+            Spacer(modifier = Modifier.height(16.dp)) 
 
 
             Text(
