@@ -72,7 +72,7 @@ fun AppUI(viewModel: BookViewModel = viewModel()) {
         }
 }
 
-// ✅ Move this outside `UiScreen`, so it's not nested incorrectly!
+
 @Composable
 fun PostItem(post: Post) {
         Card(
