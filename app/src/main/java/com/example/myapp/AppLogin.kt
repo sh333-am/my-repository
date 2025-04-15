@@ -45,6 +45,7 @@ import androidx.navigation.compose.rememberNavController
 fun AppLogin(navController: NavController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val isEnabled = username.isNotBlank() && password.isNotBlank()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -87,10 +88,13 @@ fun AppLogin(navController: NavController) {
                 value = password,
                 onValueChange = {password = it},
                 label = { Text(text = "Enter Password") },
+                visualTransformation = PasswordVisualTransformation(), 
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.size(16.dp))
-            Button(onClick = { navController.navigate("AppUI")}) {
+            Button(onClick = { navController.navigate("AppUI")},
+                  enabled = isEnabled) {
                 Text(text = "Login")
 
                 Spacer(modifier = Modifier.size(16.dp))
@@ -141,8 +145,8 @@ fun AppLogin(navController: NavController) {
 @Preview
 @Composable
 fun screen(){
-    val navController = rememberNavController() // Create a mock NavController
-    AppLogin(navController) // Call your composable function
+    val navController = rememberNavController() 
+    AppLogin(navController) 
 }
 
 
