@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.example.myapp.presentation.Screen.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,6 +19,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.myapp.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -26,7 +27,7 @@ fun SplashScreen(navController : NavHostController){
     LaunchedEffect(Unit) {
         delay(3000)
         navController.navigate("AppLogin") {
-            popUpTo("SplashScreen") {inclusive = true } // Remove splash from back stack
+            popUpTo("SplashScreen") {inclusive = true }
         }
     }
 
@@ -40,9 +41,9 @@ fun SplashScreen(navController : NavHostController){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Display Image
+
             Image(
-                painter = painterResource(id = R.drawable.jio), 
+                painter = painterResource(id = R.drawable.jio),
                 contentDescription = "App Logo",
                 modifier = Modifier.size(150.dp) 
             )

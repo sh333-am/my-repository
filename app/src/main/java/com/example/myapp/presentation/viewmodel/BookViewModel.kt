@@ -1,17 +1,20 @@
-package com.example.myapp
+package com.example.myapp.presentation.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.example.myapp.datalayer.model.Post
+import com.example.myapp.domain.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.myapp.datalayer.remote.ApiService
+import com.example.myapp.domain.repository.Usecase
 
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BookViewModel() : ViewModel() {
+@HiltViewModel
+class BookViewModel @Inject constructor(private val getUseCase: Usecase) : ViewModel() {
 
 
         private val _postList = mutableStateOf<List<Post>>(emptyList())
@@ -24,10 +27,8 @@ class BookViewModel() : ViewModel() {
             viewModelScope.launch {
                 _isLoading.value = true
                 try {
-                    val response = RetrofitInstance.api.getPosts()
-                    if (response.isSuccessful) {
-                        _postList.value = response.body() ?: emptyList()
-                    }
+                    val response = getUseCase()
+                    _postList.value = response
                 } catch (e: Exception) {
                     _postList.value = emptyList()
                 } finally {

@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -39,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -50,6 +52,14 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        // Force the use of AndroidX dependencies
+        force("androidx.core:core-ktx:1.10.0")  // Update this version as needed
+        // Exclude the old support-compat dependencies
+        exclude(module = "support-compat")
+    }
+}
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -60,6 +70,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation ("com.github.bumptech.glide:glide:4.9.0")
+    implementation ("com.google.dagger:hilt-android:2.38.1")
+    implementation ("androidx.activity:activity-ktx:1.4.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -86,7 +102,15 @@ dependencies {
     implementation ("androidx.activity:activity-compose:1.8.0")
     implementation ("androidx.core:core-splashscreen:1.0.0")
 
-
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
+    implementation("androidx.compose.foundation:foundation:1.5.0")
+    implementation("androidx.compose.ui:ui-text:1.5.0")
+    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.appcompat:appcompat:1.6.0")
+    implementation("com.google.android.material:material:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.20")
 
 
 
