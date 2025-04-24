@@ -2,9 +2,12 @@ package com.example.myapp.presentation.Screen.component
 
 
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,16 +47,18 @@ fun AppLogin(navController: NavController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val isEnabled = username.isNotBlank() && password.isNotBlank()
+    val context = LocalContext.current
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(androidx.compose.ui.graphics.Color.White)
+            .background(androidx.compose.ui.graphics.Color.Black)
     )
     {
         Image(
             painter = painterResource(id = R.drawable.ne), contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
+
         )
 
         Column(
@@ -65,7 +71,8 @@ fun AppLogin(navController: NavController) {
             Text(
                 text = "Welcome to App ",
                 fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = androidx.compose.ui.graphics.Color.White
             )
             Spacer(modifier = Modifier.size(4.dp))
 
@@ -77,7 +84,9 @@ fun AppLogin(navController: NavController) {
                 value = username,
                 onValueChange = { username = it },
                 label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                .fillMaxWidth()
+                .focusable()
             )
             Spacer(modifier = Modifier.size(16.dp))
 
@@ -87,11 +96,15 @@ fun AppLogin(navController: NavController) {
                 label = { Text(text = "Enter Password") },
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusable()
             )
             Spacer(modifier = Modifier.size(16.dp))
             Button(onClick = { navController.navigate("AppUI")},
-                  enabled = isEnabled) {
+                  enabled = isEnabled,
+                modifier = Modifier.focusable())
+            {
                 Text(text = "Login")
 
                 Spacer(modifier = Modifier.size(16.dp))
@@ -99,8 +112,9 @@ fun AppLogin(navController: NavController) {
 
             }
             Spacer(modifier = Modifier.size(30.dp))
-            Text(text = "Forgot password ", modifier = Modifier.clickable { })
-
+            Text(text = "Forgot password ", modifier = Modifier
+                .clickable { }
+                .focusable())
             Spacer(modifier = Modifier.size(16.dp))
 
             Text(text = "or sign in with")
@@ -117,18 +131,21 @@ fun AppLogin(navController: NavController) {
                 Image(painter = painterResource(id = R.drawable.go), contentDescription = null,
                     modifier = Modifier
                         .size(60.dp)
-                        .clickable { })
+                        .clickable { val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"))
+                            context.startActivity(intent)})
 
 
                 Image(painter = painterResource(id = R.drawable.fa), contentDescription = null,
                     modifier = Modifier
                         .size(60.dp)
-                        .clickable { })
+                        .clickable { val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com"))
+                            context.startActivity(intent) })
 
                 Image(painter = painterResource(id = R.drawable.tw), contentDescription = null,
                     modifier = Modifier
                         .size(60.dp)
-                        .clickable { }
+                        .clickable {val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.twitter.com"))
+                            context.startActivity(intent) }
                 )
 
 

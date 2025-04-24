@@ -63,6 +63,7 @@ configurations.all {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation("androidx.leanback:leanback:1.0.0")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
