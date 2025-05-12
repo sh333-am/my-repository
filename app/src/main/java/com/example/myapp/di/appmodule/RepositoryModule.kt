@@ -1,4 +1,4 @@
-package com.example.myapp.di
+package com.example.myapp.di.appmodule
 
 import com.example.myapp.datalayer.repositoryimp.UserRepositoryImp
 import com.example.myapp.domain.repository.UserRepository

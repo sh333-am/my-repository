@@ -7,5 +7,9 @@ interface ApiService {
 
         @GET("posts")
         suspend fun getPosts(): List<Post>
+
+
+
     }
+
 
