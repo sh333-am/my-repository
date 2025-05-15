@@ -6,14 +6,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 object RetrofitInstance  {
-    private const val baseurl = "";
+    private const val BASEURL = "https://api.weatherapi.com";
 
     private fun get() : Retrofit{
         return Retrofit.Builder()
-        .baseUrl(baseurl)
+        .baseUrl(BASEURL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     }
     val weatherapi : MyApi = get().create(MyApi::class.java)
-
+    fun getWeatherapi(): MyApi = weatherapi
 }

@@ -10,10 +10,13 @@ import com.example.mytvapplication.data.api.Constant
 import com.example.mytvapplication.data.api.NetworkResponse
 import com.example.mytvapplication.domain.RetrofitInstance
 import com.example.mytvapplication.domain.RetrofitInstance.weatherapi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.launch
 import java.util.concurrent.Flow
 
+
+@HiltViewModel
 class MyViewModel : ViewModel() {
     private val api = RetrofitInstance.weatherapi
     private val weatheresult = MutableLiveData<NetworkResponse<Weathermodel>>()

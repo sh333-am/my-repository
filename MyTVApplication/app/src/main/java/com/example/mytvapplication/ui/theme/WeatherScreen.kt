@@ -18,21 +18,25 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mytvapplication.data.api.NetworkResponse
 
 
 @Composable
-fun Weatherpage(viewModel: MyViewModel){
+fun Weatherpage(viewModel: MyViewModel = hiltViewModel()){
     var city by remember {
         mutableStateOf("") }
     val weatherresult = viewModel._weatherResult.observeAsState()
+    val boardcontroller = LocalSoftwareKeyboardController.current
     Row (modifier = Modifier.fillMaxWidth())
     {
         OutlinedTextField(value = city,
             onValueChange = {city = it},
             label = { Text(text = "Search for any location")},
             modifier = Modifier.weight(1f))
-        IconButton(onClick = { viewModel.getdata(city)}) {
+        IconButton(onClick = { viewModel.getdata(city)
+        boardcontroller?.hide()}) {
             Icon(imageVector = Icons.Default.Search,
                 contentDescription = null)
         }
